@@ -937,7 +937,7 @@
       tradeoffs: 'Chose a client-side architecture with fallback proxies over a heavy containerized backend to guarantee sub-200ms instantaneous evaluation with zero server cold starts.',
       snippet: `// OWASP Header Inspection Rule Matrix\nexport const evaluateSecurityHeaders = (headers: Headers): SecurityScore => {\n  const rules = [\n    { key: 'content-security-policy', weight: 25, failDesc: 'No CSP defined; high XSS risk' },\n    { key: 'strict-transport-security', weight: 20, failDesc: 'HSTS absent; vulnerable to SSL stripping' },\n    { key: 'x-frame-options', weight: 15, failDesc: 'Clickjacking possible via unauthorized iframe embed' },\n    { key: 'x-content-type-options', weight: 15, failDesc: 'MIME-sniffing protection disabled' },\n    { key: 'referrer-policy', weight: 15, failDesc: 'Full URL referrer leakage across domains' },\n    { key: 'permissions-policy', weight: 10, failDesc: 'Hardware APIs (camera/mic) not explicitly restricted' }\n  ];\n  return calculateScore(rules, headers);\n};`,
       repo: 'https://github.com/gurumaan/inspectflow',
-      live: 'http://localhost:3002'
+      live: 'inspectflow/'
     },
     playify: {
       title: 'Playify — Music Streaming PWA & Standalone Android App',
@@ -947,7 +947,7 @@
       tradeoffs: 'Implemented clock offset calibration with WebRTC data channels and MQTT fallback to achieve synchronized real-time multi-speaker playback across phones and laptops with sub-10ms drift.',
       snippet: `// Real-Time Spotify Jam Clock Calibration & Multi-Device Sync\nsyncWithHost(hostTimestamp, currentTrackPos) {\n  const now = performance.now();\n  const roundTripTime = (now - this.lastPingTime) / 2;\n  const estimatedHostTime = hostTimestamp + roundTripTime;\n  const drift = Math.abs(this.audio.currentTime - (currentTrackPos + roundTripTime / 1000));\n  \n  // Micro-rate adjustment or hard jump depending on drift threshold\n  if (drift > 0.05) {\n    this.audio.currentTime = currentTrackPos + (roundTripTime / 1000);\n  } else if (drift > 0.01) {\n    this.audio.playbackRate = this.audio.currentTime < currentTrackPos ? 1.03 : 0.97;\n  }\n}`,
       repo: 'https://github.com/gurumaan/playify',
-      live: 'https://peaceful-davinci.cotton-vole.workers.dev'
+      live: 'playify/'
     },
         dineflow: {
       title: 'DineFlow 2.0 — Enterprise Hospitality OS & Real-Time KDS',
@@ -957,7 +957,7 @@
       tradeoffs: 'Used browser-native BroadcastChannel and Web Audio API oscillators to achieve instantaneous cross-device ticket dispatch with zero external audio assets or server cold-start delays.',
       snippet: `// DineFlow Acoustic POS Counter Bell Synthesizer (Dual-Stage Harmonic Ping)\nplayBrassBell() {\n  const ctx = getAudioContext();\n  const t = ctx.currentTime;\n  // 1760Hz, 3520Hz, 5280Hz Multi-Harmonic Brass Ping\n  [1760, 3520, 5280].forEach((freq, idx) => {\n    const osc = ctx.createOscillator();\n    const gain = ctx.createGain();\n    osc.type = idx === 0 ? 'sine' : 'triangle';\n    osc.frequency.setValueAtTime(freq, t);\n    gain.gain.setValueAtTime(0.35 / (idx + 1), t);\n    gain.gain.exponentialRampToValueAtTime(0.0001, t + 1.2);\n    osc.connect(gain);\n    gain.connect(ctx.destination);\n    osc.start(t);\n    osc.stop(t + 1.25);\n  });\n}`,
       repo: 'https://github.com/gurumaan/dineflow',
-      live: 'https://gurumaan.github.io/dineflow/'
+      live: 'dineflow/'
     },
 powersync: {
       title: 'PowerSync Offline-First Sync Backend',
