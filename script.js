@@ -929,16 +929,6 @@
      11. ARCHITECTURAL BLUEPRINT MODAL
      -------------------------------------------------------------------------- */
   const ARCHITECTURE_DATA = {
-    inspectflow: {
-      title: 'InspectFlow — Architecture & OWASP Security Auditor',
-      badge: 'Flagship Tool · React 19 + TypeScript',
-      problem: 'Recruiters and CTOs frequently encounter toy projects with mock data that fail to demonstrate actual web security or infrastructure awareness. InspectFlow provides instant, deep compliance auditing against live production domains.',
-      topology: 'Client Browser (React 19 / Vite) ──> CORS Proxy / Direct Fetch ──> HTTP Header Inspection Engine ──> OWASP Heuristic Evaluator ──> Framework Remediation Generator (Next.js / Express / Nginx) ──> Responsive Device Sandboxing (iPhone / iPad / Desktop)',
-      tradeoffs: 'Chose a client-side architecture with fallback proxies over a heavy containerized backend to guarantee sub-200ms instantaneous evaluation with zero server cold starts.',
-      snippet: `// OWASP Header Inspection Rule Matrix\nexport const evaluateSecurityHeaders = (headers: Headers): SecurityScore => {\n  const rules = [\n    { key: 'content-security-policy', weight: 25, failDesc: 'No CSP defined; high XSS risk' },\n    { key: 'strict-transport-security', weight: 20, failDesc: 'HSTS absent; vulnerable to SSL stripping' },\n    { key: 'x-frame-options', weight: 15, failDesc: 'Clickjacking possible via unauthorized iframe embed' },\n    { key: 'x-content-type-options', weight: 15, failDesc: 'MIME-sniffing protection disabled' },\n    { key: 'referrer-policy', weight: 15, failDesc: 'Full URL referrer leakage across domains' },\n    { key: 'permissions-policy', weight: 10, failDesc: 'Hardware APIs (camera/mic) not explicitly restricted' }\n  ];\n  return calculateScore(rules, headers);\n};`,
-      repo: 'https://github.com/gurumaan/inspectflow',
-      live: 'inspectflow/'
-    },
     playify: {
       title: 'Playify — Music Streaming PWA & Standalone Android App',
       badge: 'Flagship Media · Real-Time Spotify Jam & Edge Cryptography',
