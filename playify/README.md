@@ -3,11 +3,11 @@
 # 🎵 Playify
 ### High-Performance Music Streaming PWA & Standalone Android App
 
-[![Live Web App](https://img.shields.io/badge/Live_Web_App-Cloudflare_Edge-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://peaceful-davinci.cotton-vole.workers.dev)
-[![Download APK](https://img.shields.io/badge/Download_APK-1.5_MB_Direct-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://peaceful-davinci.cotton-vole.workers.dev/Playify.apk)
+[![Live Web App](https://img.shields.io/badge/Live_Web_App-Interactive_PWA-F38020?style=for-the-badge&logo=googlechrome&logoColor=white)](https://guru4code.online/playify/)
+[![Download APK](https://img.shields.io/badge/Download_APK-1.5_MB_Direct-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://guru4code.online/playify/Playify.apk)
 [![Spotify Jam](https://img.shields.io/badge/Spotify_Jam-%3C10ms_Sync-1DB954?style=for-the-badge&logo=spotify&logoColor=white)](#-real-time-spotify-jam-sync-engine)
 [![Offline PWA](https://img.shields.io/badge/Offline_PWA-Service_Worker-5A0FC8?style=for-the-badge&logo=pwa&logoColor=white)](#-offline-first-pwa--cachestorage-pipeline)
-[![Author Portfolio](https://img.shields.io/badge/Author_Portfolio-Gursharan_Singh-b58334?style=for-the-badge&logo=safari&logoColor=white)](https://gurumaan.github.io/)
+[![Author Portfolio](https://img.shields.io/badge/Author_Portfolio-Gursharan_Singh-b58334?style=for-the-badge&logo=safari&logoColor=white)](https://guru4code.online/)
 
 <br/>
 
@@ -22,9 +22,9 @@
 **Playify** is an edge-native audio streaming ecosystem engineered from first principles. Built to run seamlessly both as a **W3C-compliant Progressive Web App (PWA)** and a **standalone hardware-accelerated Android APK**, it combines real-time multi-device collaborative listening (**Spotify Jam** with `<10ms` clock phase-lock), pure client & edge serverless **DES stream decryption**, and an intelligent offline caching pipeline.
 
 ### 🌟 Quick Links
-- 🌐 **Live Web Application:** [peaceful-davinci.cotton-vole.workers.dev](https://peaceful-davinci.cotton-vole.workers.dev)
-- 📱 **Standalone Android APK:** [Download Playify.apk (1.5 MB)](https://peaceful-davinci.cotton-vole.workers.dev/Playify.apk) *(or direct from [GitHub raw](https://github.com/gurumaan/playify/raw/main/Playify.apk))*
-- 👨‍💻 **Developer Portfolio:** [gurumaan.github.io](https://gurumaan.github.io/)
+- 🌐 **Live Web Application:** [guru4code.online/playify](https://guru4code.online/playify/)
+- 📱 **Standalone Android APK:** [Download Playify.apk (1.5 MB)](https://guru4code.online/playify/Playify.apk) *(or direct from [GitHub raw](https://github.com/gurumaan/playify/raw/main/Playify.apk))*
+- 👨‍💻 **Developer Portfolio:** [guru4code.online](https://guru4code.online/)
 
 ---
 
