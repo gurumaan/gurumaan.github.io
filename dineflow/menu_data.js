@@ -75,7 +75,7 @@ window.DINEFLOW_MENU = [
     prepTime: '6-8 min',
     dietary: ['veg', 'gluten-free'],
     desc: 'Fresh 250g Pugliese burrata, heirloom tri-color tomatoes, cold-pressed Ligurian olive oil, 12-year Modena balsamic reduction.',
-    image: 'https://images.unsplash.com/photo-1592417817098-8f3d6910985b?auto=format&fit=crop&w=700&q=80',
+    image: 'https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?auto=format&fit=crop&w=700&q=80',
     modifierGroups: [
       {
         name: 'Finishing Oil',

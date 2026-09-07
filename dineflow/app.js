@@ -383,7 +383,7 @@
       return `
         <article class="dish-card ${is86 ? 'out-of-stock' : ''}" data-id="${dish.id}">
           <div class="dish-img-wrap">
-            <img src="${dish.image}" alt="${escapeHtml(dish.name)}" class="dish-img" loading="lazy">
+            <img src="${dish.image}" alt="${escapeHtml(dish.name)}" class="dish-img" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=700&q=80';">
             <div class="dish-img-overlay"></div>
             <div class="dish-badges-float">${dietBadges}</div>
             <span class="dish-prep-float">⏱️ ${dish.prepTime}</span>
@@ -414,6 +414,10 @@
     state.modalQty = 1;
     state.modalModifiers = {};
 
+    el.modalDishImg.onerror = function() {
+      this.onerror = null;
+      this.src = 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=700&q=80';
+    };
     el.modalDishImg.src = dish.image;
     el.modalDishTitle.textContent = dish.name;
     el.modalDishPrice.textContent = `₹${dish.price.toLocaleString('en-IN')}`;
