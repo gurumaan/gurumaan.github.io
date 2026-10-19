@@ -1362,7 +1362,7 @@ class PlayifyEngine {
 
       if (!verInfo || !verInfo.version) return;
 
-      const currentVer = (typeof window !== 'undefined' && window.PLAYIFY_APP_VERSION) ? Number(window.PLAYIFY_APP_VERSION) : 95.0;
+      const currentVer = (typeof window !== 'undefined' && window.PLAYIFY_APP_VERSION) ? Number(window.PLAYIFY_APP_VERSION) : 100.0;
       const remoteVer = Number(verInfo.version);
       const minVer = verInfo.min_version ? Number(verInfo.min_version) : remoteVer;
 
