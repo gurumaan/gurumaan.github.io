@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   </noscript>
   
-  <link rel="stylesheet" href="style.css?v=92.0">
+  <link rel="stylesheet" href="style.css?v=100.1">
 </head>
 <body>
 
@@ -158,8 +158,14 @@
     <main class="sp-main-view">
       
       <!-- TOP BAR -->
-      <header class="sp-top-bar">
+      <header class="sp-top-bar" id="sp-main-topbar">
+        <button class="sp-mobile-back-btn" id="sp-mobile-back-btn" onclick="sp.historyBack()" title="Back">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
         <div class="sp-topbar-left">
+          <div class="sp-mobile-user-avatar" id="sp-mobile-user-avatar" onclick="sp.openUserProfile()" title="Your Profile">P</div>
+
           <div class="sp-history-btns">
             <button class="sp-hist-btn" onclick="sp.historyBack()" title="Go back"><i class="fa-solid fa-chevron-left"></i></button>
             <button class="sp-hist-btn" onclick="sp.historyForward()" title="Go forward"><i class="fa-solid fa-chevron-right"></i></button>
@@ -343,6 +349,8 @@
                 <button class="sp-clear-recents-btn" onclick="sp.clearRecentSearches()" style="background:none;border:none;color:var(--sp-text-subdued);font-size:12px;font-weight:700;cursor:pointer;">Clear all</button>
               </div>
               <div class="sp-recent-searches-row" id="sp-recent-searches-row"></div>
+            </div>
+
             <!-- Spotify Popular Artist & Song Radios Shelf -->
             <div class="sp-radio-stations-box" style="margin-bottom:28px;">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
@@ -940,10 +948,6 @@
     <button class="sp-mob-item" id="mob-nav-library" onclick="sp.navigate('library')">
       <i class="fa-solid fa-lines-leaning"></i>
       <span>Your Library</span>
-    </button>
-    <button class="sp-mob-item" id="mob-nav-liked" onclick="sp.openLikedSongs()">
-      <i class="fa-solid fa-heart"></i>
-      <span>Liked Songs</span>
     </button>
   </nav>
 
@@ -2048,13 +2052,19 @@
   </div>
 
   <script>
-    window.PLAYIFY_APP_VERSION = 100.0;
-    window.__PLAYIFY_V95_INSTALLED__ = true;
+    const _up = new URLSearchParams(window.location.search);
+    if (_up.has('old') || _up.has('test_old') || (_up.has('version') && parseFloat(_up.get('version')) < 100)) {
+      window.PLAYIFY_APP_VERSION = _up.has('version') ? parseFloat(_up.get('version')) : 91.0;
+      window.__PLAYIFY_V95_INSTALLED__ = false;
+    } else {
+      window.PLAYIFY_APP_VERSION = 100.0;
+      window.__PLAYIFY_V95_INSTALLED__ = true;
+    }
   </script>
   <script src="qrcode.min.js?v=100.0"></script>
   <script src="charts_data.js?v=100.0"></script>
   <script src="peerjs.min.js?v=100.0"></script>
-  <script src="app.js?v=100.0"></script>
+  <script src="app.js?v=100.1"></script>
   <script src="music_db_data.js?v=100.0" defer></script>
 
   <!-- SERVICE WORKER REGISTRATION FOR 100% OFFLINE PLAYBACK -->

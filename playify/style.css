@@ -2002,78 +2002,374 @@ body {
   .sp-app-layout {
     grid-template-columns: 1fr;
     padding: 0;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 120px);
   }
 
   .sp-sidebar {
+    display: none !important;
+  }
+
+  /* Safe Area Topbar on Mobile */
+  .sp-top-bar {
+    padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px 10px 16px !important;
+    gap: 12px !important;
+    background: #0e1118 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+    min-height: 52px !important;
+    box-sizing: border-box !important;
+  }
+
+  .sp-topbar-left {
+    flex: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    min-width: 0 !important;
+  }
+
+  /* Hide Desktop Nav and Clutter on Mobile */
+  .sp-history-btns,
+  .sp-home-circle-btn,
+  .sp-top-pill-btn,
+  #top-btn-sleeptimer,
+  #top-btn-history,
+  .sp-top-user-pill,
+  .sp-hero-billboard {
+    display: none !important;
+  }
+
+  /* Mobile User Profile Avatar */
+  .sp-mobile-user-avatar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    background: linear-gradient(135deg, #1ed760, #169c46) !important;
+    color: #000 !important;
+    font-weight: 800 !important;
+    font-size: 13px !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+  }
+  .sp-mobile-user-avatar.hidden {
+    display: none !important;
+  }
+
+  /* Mobile Topbar Back Arrow */
+  .sp-mobile-back-btn {
     display: none;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: none !important;
+    color: #ffffff !important;
+    font-size: 16px !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+  }
+  .sp-mobile-back-btn.visible {
+    display: flex !important;
   }
 
-  .sp-mobile-nav {
-    display: flex;
+  /* Search Bar: Only shown when on search view */
+  body:not([data-current-view="search"]) .sp-search-bar {
+    display: none !important;
   }
 
+  body[data-current-view="search"] .sp-search-bar {
+    display: flex !important;
+    flex: 1 !important;
+    width: 100% !important;
+    background: #242424 !important;
+    border-radius: 500px !important;
+    padding: 8px 14px !important;
+    margin: 0 !important;
+  }
+
+  body[data-current-view="search"] .sp-topbar-right {
+    display: none !important;
+  }
+
+  .sp-topbar-right {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .sp-viewport {
+    padding: 0 16px 28px 16px !important;
+  }
+
+  /* -------------------------------------------------------------
+     TRACKLIST TABLE & ROWS: SPOTIFY MOBILE 1:1 PARITY
+     ------------------------------------------------------------- */
+  .sp-tracklist-header {
+    display: none !important;
+  }
+
+  .sp-track-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 8px 4px !important;
+    border-radius: 8px !important;
+    min-height: 56px !important;
+    gap: 12px !important;
+  }
+
+  .sp-track-row:active {
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .track-num-col,
+  .track-album-col,
+  .track-duration-val {
+    display: none !important;
+  }
+
+  .track-title-col {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+  }
+
+  .track-thumb {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 4px !important;
+    flex-shrink: 0 !important;
+    object-fit: cover !important;
+  }
+
+  .track-names {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3px !important;
+    min-width: 0 !important;
+    flex: 1 !important;
+  }
+
+  .track-name-txt {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .track-artist-txt {
+    font-size: 13px !important;
+    color: var(--sp-text-subdued) !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .track-dur-col {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .sp-row-heart-btn {
+    display: flex !important;
+    opacity: 1 !important;
+    color: var(--sp-text-subdued) !important;
+    font-size: 16px !important;
+    padding: 8px !important;
+    background: none !important;
+    border: none !important;
+  }
+
+  .sp-row-heart-btn.liked {
+    color: var(--sp-green) !important;
+  }
+
+  .sp-row-more-btn {
+    display: flex !important;
+    opacity: 1 !important;
+    color: var(--sp-text-subdued) !important;
+    font-size: 16px !important;
+    padding: 8px !important;
+    background: none !important;
+    border: none !important;
+  }
+
+  /* -------------------------------------------------------------
+     ENTITY HEADER (ALBUM, PLAYLIST, LIKED SONGS)
+     ------------------------------------------------------------- */
+  .sp-entity-hero {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 16px 12px 8px 12px !important;
+    gap: 14px !important;
+  }
+
+  .entity-cover-box {
+    width: 160px !important;
+    height: 160px !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7) !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .entity-title {
+    font-size: 24px !important;
+    font-weight: 800 !important;
+    line-height: 1.2 !important;
+    margin: 4px 0 !important;
+  }
+
+  .entity-meta-row {
+    justify-content: center !important;
+    font-size: 13px !important;
+    color: var(--sp-text-subdued) !important;
+    gap: 6px !important;
+  }
+
+  .sp-action-bar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 8px 4px 16px 4px !important;
+  }
+
+  .sp-big-play-btn {
+    width: 52px !important;
+    height: 52px !important;
+    font-size: 20px !important;
+    order: 2 !important;
+  }
+
+  /* -------------------------------------------------------------
+     HOME FEED WIDGETS
+     ------------------------------------------------------------- */
+  .sp-greeting-title {
+    font-size: 22px !important;
+    font-weight: 800 !important;
+    margin: 12px 0 14px 0 !important;
+  }
+
+  .sp-quick-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .sp-quick-card {
+    height: 52px !important;
+    gap: 8px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-radius: 6px !important;
+  }
+
+  .sp-quick-card img {
+    width: 52px !important;
+    height: 52px !important;
+  }
+
+  .sp-quick-title {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    padding-right: 6px !important;
+  }
+
+  .sp-category-pills {
+    margin: 4px 0 14px 0 !important;
+    gap: 8px !important;
+  }
+
+  .sp-cat-pill {
+    font-size: 13px !important;
+    padding: 7px 16px !important;
+    border-radius: 20px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* -------------------------------------------------------------
+     MINI PLAYER BAR & BOTTOM NAV
+     ------------------------------------------------------------- */
   .sp-player-bar {
-    bottom: calc(66px + env(safe-area-inset-bottom, 0px));
-    left: 8px;
-    right: 8px;
-    grid-template-columns: 1fr auto;
-    height: 64px;
-    background: rgba(16, 20, 29, 0.96);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 14px;
-    margin: 0;
-    width: calc(100% - 16px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    bottom: calc(56px + env(safe-area-inset-bottom, 0px) + 6px) !important;
+    left: 8px !important;
+    right: 8px !important;
+    width: calc(100% - 16px) !important;
+    height: 58px !important;
+    background: rgba(18, 22, 32, 0.96) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 10px !important;
+    margin: 0 !important;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6) !important;
   }
 
   .sp-player-center .sp-progress-container,
   .sp-player-center .sp-ctrl-btn,
   .sp-player-right {
-    display: none;
+    display: none !important;
   }
 
-  .sp-quick-grid {
-    grid-template-columns: 1fr 1fr;
+  .sp-mobile-nav {
+    display: flex !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: calc(56px + env(safe-area-inset-bottom, 0px)) !important;
+    padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+    background: rgba(10, 12, 18, 0.98) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    align-items: center !important;
+    justify-content: space-around !important;
+    z-index: 1000 !important;
   }
 
-  .sp-lib-pinned-grid {
-    grid-template-columns: 1fr;
+  .sp-mob-item {
+    flex: 1 !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    background: none !important;
+    border: none !important;
+    color: #b3b3b3 !important;
+    cursor: pointer !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    transition: color 0.15s ease !important;
   }
 
-  .sp-hero-billboard {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px;
+  .sp-mob-item i {
+    font-size: 20px !important;
   }
 
-  .sp-billboard-art {
-    width: 100px;
-    height: 100px;
+  .sp-mob-item.active {
+    color: #ffffff !important;
   }
 
-  .sp-top-bar {
-    padding: calc(var(--sp-safe-top, 44px) + 8px) 16px 12px 16px !important;
-  }
-
-  .sp-viewport {
-    padding: 0 16px 24px 16px;
-  }
-
-  .sp-entity-hero {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .entity-cover-box {
-    width: 140px;
-    height: 140px;
-  }
-
-  .entity-title {
-    font-size: 28px;
+  .sp-mob-item.active i {
+    color: #ffffff !important;
   }
 }
 
@@ -3274,12 +3570,7 @@ input:checked + .sp-slider-round:before {
     padding: 16px 14px calc(env(safe-area-inset-bottom, 0px) + 24px) 14px !important;
   }
 
-  .sp-track-row {
-    grid-template-columns: 24px 1fr auto !important;
-    gap: 8px !important;
-    padding: 8px 8px !important;
-  }
-  .track-album-col {
+  .sp-tracklist-header {
     display: none !important;
   }
 }

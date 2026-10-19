@@ -5228,6 +5228,13 @@ class PlayifyEngine {
       sec.classList.remove('active');
     });
 
+    document.body.setAttribute('data-current-view', viewId);
+    const backBtn = document.getElementById('sp-mobile-back-btn');
+    const mobAvatar = document.getElementById('sp-mobile-user-avatar');
+    const isSubView = (viewId === 'album' || viewId === 'artist' || viewId === 'lyrics');
+    if (backBtn) backBtn.classList.toggle('visible', isSubView);
+    if (mobAvatar) mobAvatar.classList.toggle('hidden', isSubView);
+
     const target = document.getElementById(`view-${viewId}`);
     if (target) {
       target.style.display = 'flex';
