@@ -1223,11 +1223,9 @@ class PlayifyEngine {
       // Load 2.2MB Music DB asynchronously in background without blocking UI thread or startup
       this.loadMusicDBInBackground();
 
-      setTimeout(() => {
-        this.checkForAppUpdates();
-      }, 400);
-
-      // Automatically sync dynamic remote charts & Punjabi releases in background
+      // Check for updates immediately and periodically
+      this.checkForAppUpdates();
+      setTimeout(() => this.checkForAppUpdates(), 400);
       setTimeout(() => {
         this.syncRemoteChartsAndMusic();
         this.checkForAppUpdates();
@@ -1235,6 +1233,8 @@ class PlayifyEngine {
 
       if (typeof window !== 'undefined') {
         window.addEventListener('online', () => this.checkForAppUpdates());
+        window.addEventListener('focus', () => this.checkForAppUpdates());
+        setInterval(() => this.checkForAppUpdates(), 20000);
       }
     } catch(e) {
       console.warn('loadDatabaseAndCharts notice:', e);
@@ -1340,16 +1340,20 @@ class PlayifyEngine {
   }
 
   async checkForAppUpdates() {
-    if (typeof navigator !== 'undefined' && !navigator.onLine) return;
     try {
       let verInfo = null;
+      const ts = Date.now();
       const candidates = [
-        '/version.json',
-        'https://guru4code.online/playify/version.json'
+        `https://guru4code.online/playify/version.json?t=${ts}`,
+        `https://raw.githubusercontent.com/gurumaan/gurumaan.github.io/main/playify/version.json?t=${ts}`,
+        `/version.json?t=${ts}`
       ];
       for (const url of candidates) {
         try {
-          const res = await fetch(url, { signal: AbortSignal.timeout(3500) });
+          const ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+          const tid = ctrl ? setTimeout(() => ctrl.abort(), 4500) : null;
+          const res = await fetch(url, { signal: ctrl ? ctrl.signal : undefined, cache: 'no-store' });
+          if (tid) clearTimeout(tid);
           if (res.ok) {
             const data = await res.json();
             if (data && data.version) {
@@ -1362,7 +1366,7 @@ class PlayifyEngine {
 
       if (!verInfo || !verInfo.version) return;
 
-      const currentVer = (typeof window !== 'undefined' && window.PLAYIFY_APP_VERSION) ? Number(window.PLAYIFY_APP_VERSION) : 100.0;
+      const currentVer = (typeof window !== 'undefined' && window.PLAYIFY_APP_VERSION) ? Number(window.PLAYIFY_APP_VERSION) : 91.0;
       const remoteVer = Number(verInfo.version);
       const minVer = verInfo.min_version ? Number(verInfo.min_version) : remoteVer;
 
@@ -1380,7 +1384,7 @@ class PlayifyEngine {
   }
 
   triggerApkDownload(apkUrl) {
-    const finalUrl = apkUrl || '/download/app';
+    const finalUrl = apkUrl || 'https://guru4code.online/playify/Playify.apk';
     // 1. Try Native Android Bridge if present
     if (typeof window !== 'undefined' && window.PlayifyNative && typeof window.PlayifyNative.downloadApk === 'function') {
       try {
@@ -1391,7 +1395,12 @@ class PlayifyEngine {
       }
     }
 
-    // 2. Standard DOM Download
+    // 2. Open via browser / system intent
+    try {
+      window.open(finalUrl, '_system');
+    } catch(e) {}
+
+    // 3. Standard DOM Download
     try {
       const a = document.createElement('a');
       a.href = finalUrl;

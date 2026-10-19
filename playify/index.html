@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   </noscript>
   
-  <link rel="stylesheet" href="style.css?v=100.1">
+  <link rel="stylesheet" href="style.css?v=200.0">
 </head>
 <body>
 
@@ -2053,19 +2053,19 @@
 
   <script>
     const _up = new URLSearchParams(window.location.search);
-    if (_up.has('old') || _up.has('test_old') || (_up.has('version') && parseFloat(_up.get('version')) < 100)) {
+    if (_up.has('old') || _up.has('test_old') || (_up.has('version') && parseFloat(_up.get('version')) < 200)) {
       window.PLAYIFY_APP_VERSION = _up.has('version') ? parseFloat(_up.get('version')) : 91.0;
       window.__PLAYIFY_V95_INSTALLED__ = false;
     } else {
-      window.PLAYIFY_APP_VERSION = 100.0;
+      window.PLAYIFY_APP_VERSION = 200.0;
       window.__PLAYIFY_V95_INSTALLED__ = true;
     }
   </script>
-  <script src="qrcode.min.js?v=100.0"></script>
-  <script src="charts_data.js?v=100.0"></script>
-  <script src="peerjs.min.js?v=100.0"></script>
-  <script src="app.js?v=100.1"></script>
-  <script src="music_db_data.js?v=100.0" defer></script>
+  <script src="qrcode.min.js?v=200.0"></script>
+  <script src="charts_data.js?v=200.0"></script>
+  <script src="peerjs.min.js?v=200.0"></script>
+  <script src="app.js?v=200.0"></script>
+  <script src="music_db_data.js?v=200.0" defer></script>
 
   <!-- SERVICE WORKER REGISTRATION FOR 100% OFFLINE PLAYBACK -->
   <script>
