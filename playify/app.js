@@ -1344,8 +1344,8 @@ class PlayifyEngine {
       let verInfo = null;
       const ts = Date.now();
       const candidates = [
-        `https://guru4code.online/playify/version.json?t=${ts}`,
         `https://raw.githubusercontent.com/gurumaan/gurumaan.github.io/main/playify/version.json?t=${ts}`,
+        `https://guru4code.online/playify/version.json?t=${ts}`,
         `/version.json?t=${ts}`
       ];
       for (const url of candidates) {
@@ -1357,8 +1357,9 @@ class PlayifyEngine {
           if (res.ok) {
             const data = await res.json();
             if (data && data.version) {
-              verInfo = data;
-              break;
+              if (!verInfo || Number(data.version) > Number(verInfo.version)) {
+                verInfo = data;
+              }
             }
           }
         } catch(e) {}
