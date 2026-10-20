@@ -7559,8 +7559,8 @@ input:checked + .sp-slider-round:before {
   /* Hide Desktop Search Bar & Desktop Header Controls on Mobile Home */
   .sp-top-bar .sp-search-bar,
   .sp-topbar-right,
-  .sp-category-pills,
-  .sp-greeting-title,
+  #view-home > .sp-category-pills,
+  #view-home > .sp-greeting-title,
   #sp-dj-hero-card,
   #sp-daylist-card,
   .sp-hero-billboard {
@@ -8185,4 +8185,203 @@ input:checked + .sp-slider-round:before {
 @keyframes slideUp {
   from { transform: translateY(100%); }
   to { transform: translateY(0); }
+}
+
+
+/* ==========================================================================
+   PERFECT ALIGNMENT & PINNED ICONS REFINEMENT
+   ========================================================================== */
+
+/* Pinned Cards in Library - Consistent Spotify Sizing */
+.sp-lib-pinned-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 12px !important;
+  margin-bottom: 20px !important;
+}
+
+.sp-lib-card-pinned {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 12px 14px !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  min-height: 64px !important;
+  box-sizing: border-box !important;
+}
+
+.sp-pinned-icon {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 6px !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+.sp-pinned-icon.liked {
+  background: linear-gradient(135deg, #450af5, #8e8ee5) !important;
+}
+
+.sp-pinned-icon.downloads {
+  background: linear-gradient(135deg, #0d7337, #1ed760) !important;
+}
+
+.sp-pinned-icon.recent {
+  background: linear-gradient(135deg, #1e3264, #27856a) !important;
+}
+
+.sp-pinned-icon.blend {
+  background: linear-gradient(135deg, #ff4674, #9b51e0) !important;
+}
+
+.sp-pinned-meta {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  overflow: hidden !important;
+}
+
+.sp-lib-card-pinned h2 {
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.sp-lib-card-pinned p {
+  font-size: 11px !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Library View Mode - Straight Vertical List */
+.sp-lib-list-mode {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+}
+
+.sp-lib-list-mode .sp-card {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  padding: 6px 4px !important;
+  gap: 14px !important;
+  background: transparent !important;
+  border-radius: 8px !important;
+  box-sizing: border-box !important;
+}
+
+.sp-lib-list-mode .sp-card:active {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.sp-lib-list-mode .sp-card-cover-wrap {
+  width: 56px !important;
+  height: 56px !important;
+  flex: 0 0 56px !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+}
+
+.sp-lib-list-mode .sp-card-info {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+  overflow: hidden !important;
+  flex: 1 !important;
+  text-align: left !important;
+}
+
+.sp-lib-list-mode .sp-card-title {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.sp-lib-list-mode .sp-card-desc {
+  font-size: 13px !important;
+  color: #a7a7a7 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Clean 2-Column Grid Alignment (No Tilted or Crooked Cards) */
+.sp-cards-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 16px !important;
+}
+
+.sp-cards-grid:not(.sp-lib-list-mode) .sp-card {
+  display: flex !important;
+  flex-direction: column !important;
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+.sp-cards-grid:not(.sp-lib-list-mode) .sp-card-cover-wrap {
+  width: 100% !important;
+  aspect-ratio: 1 / 1 !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  background: #282828 !important;
+}
+
+.sp-cards-grid:not(.sp-lib-list-mode) .sp-card-cover-wrap img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.sp-cards-grid:not(.sp-lib-list-mode) .sp-card-info {
+  margin-top: 8px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+}
+
+.sp-cards-grid:not(.sp-lib-list-mode) .sp-card-title {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.sp-cards-grid:not(.sp-lib-list-mode) .sp-card-desc {
+  font-size: 12px !important;
+  color: #a7a7a7 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Ensure View Sections Respect Navigation and Don't Overlap */
+.sp-view-section {
+  display: none;
+}
+
+.sp-view-section.active {
+  display: flex !important;
 }

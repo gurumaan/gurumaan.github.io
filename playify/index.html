@@ -405,13 +405,12 @@
             <div class="sp-lib-title-row">
               <div style="display:flex;align-items:center;gap:12px;">
                 <div class="sp-mobile-user-avatar" onclick="sp.openProfileDrawer()" title="Profile">G</div>
-                <h1 class="sp-greeting-title" style="margin:0;font-size:24px;font-weight:800;">Your Library</h1>
+                <h1 class="sp-lib-heading" style="margin:0;font-size:24px;font-weight:800;color:#fff;">Your Library</h1>
               </div>
               <div style="display:flex;align-items:center;gap:14px;">
                 <button class="sp-icon-btn" onclick="sp.toggleLibrarySearch()" title="Search in Your Library"><i class="fa-solid fa-magnifying-glass"></i></button>
                 <button class="sp-icon-btn" onclick="sp.openSpotifyCreateSheet()" title="Create playlist, blend or jam"><i class="fa-solid fa-plus"></i></button>
               </div>
-            </div>
             </div>
 
             <!-- Library Expandable Search Input -->
@@ -442,42 +441,55 @@
             </div>
           </div>
 
-          <!-- Pinned Big Cards (Liked Songs & History) -->
+          <!-- Pinned Library Cards with Vector SVG Icons -->
           <div class="sp-lib-pinned-grid">
-            
             <div class="sp-lib-card-pinned liked" onclick="sp.openLikedSongs()">
-              <div class="sp-pinned-icon"><i class="fa-solid fa-heart"></i></div>
-              <div>
+              <div class="sp-pinned-icon liked">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="#ffffff">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </div>
+              <div class="sp-pinned-meta">
                 <h2>Liked Songs</h2>
                 <p id="lib-page-liked-count">0 Liked Songs</p>
               </div>
             </div>
 
-            
             <div class="sp-lib-card-pinned downloads" onclick="sp.openDownloadedSongsView()">
-              <div class="sp-pinned-icon download"><i class="fa-solid fa-circle-down"></i></div>
-              <div>
+              <div class="sp-pinned-icon downloads">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="#ffffff">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14l-4-4 1.41-1.41L11 13.17V7h2v6.17l2.59-2.58L17 12l-5 5z"/>
+                </svg>
+              </div>
+              <div class="sp-pinned-meta">
                 <h2>Downloaded Music</h2>
                 <p id="lib-page-downloads-count">0 Offline Songs</p>
               </div>
             </div>
 
             <div class="sp-lib-card-pinned recent" onclick="sp.openRecentlyPlayed()">
-              <div class="sp-pinned-icon history"><i class="fa-solid fa-clock-rotate-left"></i></div>
-              <div>
+              <div class="sp-pinned-icon recent">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="#ffffff">
+                  <path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21a9 9 0 0 0 0-18zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
+                </svg>
+              </div>
+              <div class="sp-pinned-meta">
                 <h2>Recently Played</h2>
                 <p id="lib-page-recent-count">Auto-Saved Tracks</p>
               </div>
             </div>
 
             <div class="sp-lib-card-pinned blend" onclick="sp.openBlendModal()">
-              <div class="sp-pinned-icon blend" style="background:linear-gradient(135deg,#ff4674,#9b51e0);"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M8.015,8.015a7.6,7.6 0,0 1,1.996 0.137,7.51 7.51,0 0,1 5.837,5.837 7.5,7.5 0,0 1,0.137 1.996A7.5,7.5 0,0 1,8.5 23a7.5,7.5 0,0 1,-0.485 -14.985m5.683,5.683a5.52,5.52 0,0 0,-3.396 -3.396,5.52 5.52,0 0,0 3.396,3.396M8.5,21a5.5,5.5 0,0 0,5.49 -5.152,7.51 7.51,0 0,1 -5.838,-5.837A5.5,5.5 0,0 0,8.5 21 M17.318,13.692A5.502,5.502 0,0 0,15.5 3a5.5,5.5 0,0 0,-5.192 3.682,9 9,0 0,0 -2.04,-0.18 7.5,7.5 0,1 1,9.228 9.228,9 9,0 0,0 -0.179,-2.039Z"/></svg></div>
-              <div>
+              <div class="sp-pinned-icon blend">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="#ffffff">
+                  <path d="M8 8a5 5 0 1 0 0 10A5 5 0 0 0 8 8zm8-2a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm-4 4a4.98 4.98 0 0 1 1.5 3.65c0 1.4-.58 2.66-1.5 3.56a4.98 4.98 0 0 1-1.5-3.56c0-1.4.58-2.66 1.5-3.65z"/>
+                </svg>
+              </div>
+              <div class="sp-pinned-meta">
                 <h2>Spotify Blend</h2>
                 <p>Taste Match with Friends</p>
               </div>
             </div>
-
           </div>
 
           <!-- Library Grid Items (Curated Collections) -->
@@ -735,7 +747,7 @@
     <!-- EXACT SPOTIFY MOBILE FLOATING MINI-PLAYER -->
   <footer class="sp-player-bar" id="sp-player-bar" onclick="sp.handleMiniPlayerClick(event)">
     <div class="sp-player-left">
-      <img id="player-thumb" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=100" alt="Thumb" referrerpolicy="no-referrer">
+      <img id="player-thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='%23282828'><rect width='24' height='24' rx='4' fill='%23282828'/><path d='M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z' fill='%231ed760'/></svg>" alt="" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='%23282828'><rect width='24' height='24' rx='4' fill='%23282828'/><path d='M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z' fill='%231ed760'/></svg>'">
       <div class="sp-player-track-meta">
         <div class="sp-player-song-title" id="player-song-title">Select a song to play</div>
         <div class="sp-player-artist-name" id="player-artist-name" onclick="event.stopPropagation(); sp.openArtistFromPlayer()" title="View Artist Profile">Playify</div>

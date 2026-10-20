@@ -3448,7 +3448,7 @@ class PlayifyEngine {
         artistsRow.innerHTML = arts.map(a => `
           <div class="sp-card artist-card" onclick="sp.openArtistPage('${this.escapeJsString(a.name)}', '${this.escapeJsString(a.image)}', '${this.escapeJsString(a.id)}')">
             <div class="sp-card-cover-wrap">
-              <img src="${a.image}" alt="${this.escapeHtml(a.name)}" referrerpolicy="no-referrer" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300'">
+              <img src="${a.image}" alt="${this.escapeHtml(a.name)}" referrerpolicy="no-referrer" onerror="this.src=item.fallback || \'data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 24 24\\' fill=\\'%23282828\\'><rect width=\\'24\\' height=\\'24\\' rx=\\'4\\' fill=\\'%23282828\\'/><path d=\\'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z\\' fill=\\'%231ed760\\'/></svg>\'">
             </div>
             <div class="sp-card-info">
               <div class="sp-card-title">${this.escapeHtml(a.name)}</div>
@@ -3482,7 +3482,7 @@ class PlayifyEngine {
         albumsRow.innerHTML = albs.map(alb => `
           <div class="sp-card" onclick="sp.openAlbumPage('${this.escapeJsString(alb.title)}', '${this.escapeJsString(alb.artist || '')}', '${this.escapeJsString(alb.image)}', '${this.escapeJsString(alb.id)}')">
             <div class="sp-card-cover-wrap">
-              <img src="${alb.image}" alt="${this.escapeHtml(alb.title)}" referrerpolicy="no-referrer" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300'">
+              <img src="${alb.image}" alt="${this.escapeHtml(alb.title)}" referrerpolicy="no-referrer" onerror="this.src=item.fallback || \'data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 24 24\\' fill=\\'%23282828\\'><rect width=\\'24\\' height=\\'24\\' rx=\\'4\\' fill=\\'%23282828\\'/><path d=\\'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z\\' fill=\\'%231ed760\\'/></svg>\'">
             </div>
             <div class="sp-card-info">
               <div class="sp-card-title">${this.escapeHtml(alb.title)}</div>
@@ -3605,7 +3605,7 @@ class PlayifyEngine {
         topResultBox.innerHTML = `
           <div class="sp-card" style="width:100%;height:100%;flex:1;cursor:pointer" onclick="sp.openArtistPage('${this.escapeJsString(topData.name)}', '${this.escapeJsString(topData.image)}', '${this.escapeJsString(topData.id)}')">
             <div style="font-size:24px;font-weight:800;color:#fff;margin-bottom:12px">Top result</div>
-            <img src="${topData.image}" style="width:108px;height:108px;border-radius:50%;object-fit:cover;box-shadow:0 8px 24px rgba(0,0,0,0.6)" referrerpolicy="no-referrer" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300'">
+            <img src="${topData.image}" style="width:108px;height:108px;border-radius:50%;object-fit:cover;box-shadow:0 8px 24px rgba(0,0,0,0.6)" referrerpolicy="no-referrer" onerror="this.src=item.fallback || \'data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 24 24\\' fill=\\'%23282828\\'><rect width=\\'24\\' height=\\'24\\' rx=\\'4\\' fill=\\'%23282828\\'/><path d=\\'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z\\' fill=\\'%231ed760\\'/></svg>\'">
             <div style="font-size:28px;font-weight:900;color:#fff;margin-top:14px">${this.escapeHtml(topData.name)}</div>
             <div style="font-size:14px;color:var(--sp-text-subdued);margin-top:4px"><span style="background:var(--sp-card);padding:3px 8px;border-radius:12px;font-size:11px;font-weight:700;color:#fff;text-transform:uppercase">Artist</span> &bull; Verified Profile</div>
             <div class="sp-card-play-btn" style="opacity:1;transform:none;right:20px;bottom:20px" onclick="event.stopPropagation(); sp.playArtistTopSongs('${this.escapeJsString(topData.name)}', '${this.escapeJsString(topData.image)}', '${this.escapeJsString(topData.id)}')"><i class="fa-solid fa-play"></i></div>
@@ -3616,7 +3616,7 @@ class PlayifyEngine {
         topResultBox.innerHTML = `
           <div class="sp-card" style="width:100%;height:100%;flex:1;cursor:pointer" onclick="sp.playSearchTopSong()">
             <div style="font-size:24px;font-weight:800;color:#fff;margin-bottom:12px">Top result</div>
-            <img src="${topData.image}" style="width:96px;height:96px;border-radius:4px;object-fit:cover;box-shadow:0 8px 24px rgba(0,0,0,0.5)" referrerpolicy="no-referrer" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300'">
+            <img src="${topData.image}" style="width:96px;height:96px;border-radius:4px;object-fit:cover;box-shadow:0 8px 24px rgba(0,0,0,0.5)" referrerpolicy="no-referrer" onerror="this.src=item.fallback || \'data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 24 24\\' fill=\\'%23282828\\'><rect width=\\'24\\' height=\\'24\\' rx=\\'4\\' fill=\\'%23282828\\'/><path d=\\'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z\\' fill=\\'%231ed760\\'/></svg>\'">
             <div style="font-size:28px;font-weight:900;color:#fff;margin-top:14px">${this.escapeHtml(topData.title)}</div>
             <div style="font-size:14px;color:var(--sp-text-subdued);margin-top:4px">Song &bull; <span style="color:#fff;font-weight:700">${this.escapeHtml(this.cleanArtistNames(topData.artist))}</span></div>
             <div class="sp-card-play-btn" style="opacity:1;transform:none;right:20px;bottom:20px"><i class="fa-solid fa-play"></i></div>
@@ -3660,7 +3660,7 @@ class PlayifyEngine {
       artistsRow.innerHTML = data.artists.map(a => `
         <div class="sp-card artist-card" onclick="sp.openArtistPage('${a.name.replace(/'/g, "\\'")}', '${a.image}', '${a.id}')">
           <div class="sp-card-cover-wrap">
-            <img src="${a.image}" alt="${a.name}" referrerpolicy="no-referrer" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300'">
+            <img src="${a.image}" alt="${a.name}" referrerpolicy="no-referrer" onerror="this.src=item.fallback || \'data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 24 24\\' fill=\\'%23282828\\'><rect width=\\'24\\' height=\\'24\\' rx=\\'4\\' fill=\\'%23282828\\'/><path d=\\'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z\\' fill=\\'%231ed760\\'/></svg>\'">
           </div>
           <div class="sp-card-info">
             <div class="sp-card-title">${a.name}</div>
@@ -3677,7 +3677,7 @@ class PlayifyEngine {
       albumsRow.innerHTML = data.albums.map(alb => `
         <div class="sp-card" onclick="sp.openAlbumPage('${alb.title.replace(/'/g, "\\'")}', '${alb.artist.replace(/'/g, "\\'")}', '${alb.image}', '${alb.id}')">
           <div class="sp-card-cover-wrap">
-            <img src="${alb.image}" alt="${alb.title}" referrerpolicy="no-referrer" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300'">
+            <img src="${alb.image}" alt="${alb.title}" referrerpolicy="no-referrer" onerror="this.src=item.fallback || \'data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 24 24\\' fill=\\'%23282828\\'><rect width=\\'24\\' height=\\'24\\' rx=\\'4\\' fill=\\'%23282828\\'/><path d=\\'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z\\' fill=\\'%231ed760\\'/></svg>\'">
           </div>
           <div class="sp-card-info">
             <div class="sp-card-title">${alb.title}</div>
@@ -3696,7 +3696,7 @@ class PlayifyEngine {
       playlistsRow.innerHTML = data.playlists.map(pl => `
         <div class="sp-card" onclick="sp.openPlaylist('${this.escapeJsString(pl.title || pl.name)}', '${this.escapeJsString(pl.subtitle || pl.description || '')}', '${this.escapeJsString(pl.image)}', '${this.escapeJsString(pl.id)}')">
           <div class="sp-card-cover-wrap">
-            <img src="${pl.image}" alt="${this.escapeHtml(pl.title || pl.name)}" referrerpolicy="no-referrer" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300'">
+            <img src="${pl.image}" alt="${this.escapeHtml(pl.title || pl.name)}" referrerpolicy="no-referrer" onerror="this.src=item.fallback || \'data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 24 24\\' fill=\\'%23282828\\'><rect width=\\'24\\' height=\\'24\\' rx=\\'4\\' fill=\\'%23282828\\'/><path d=\\'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z\\' fill=\\'%231ed760\\'/></svg>\'">
             <div class="sp-card-play-btn" onclick="event.stopPropagation(); sp.playPlaylistById('${this.escapeJsString(pl.id)}', '${this.escapeJsString(pl.title || pl.name)}')"><i class="fa-solid fa-play"></i></div>
           </div>
           <div class="sp-card-info">
@@ -4159,7 +4159,7 @@ class PlayifyEngine {
     albumsRow.innerHTML = albumList.map(alb => `
       <div class="sp-card" onclick="sp.openAlbumPage('${this.escapeJsString(alb.title)}', '${this.escapeJsString(alb.artist || this.currentViewArtistName)}', '${this.escapeJsString(alb.image)}', '${this.escapeJsString(alb.id || '')}')">
         <div class="sp-card-cover-wrap">
-          <img src="${alb.image}" alt="${this.escapeHtml(alb.title)}" referrerpolicy="no-referrer" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300'">
+          <img src="${alb.image}" alt="${this.escapeHtml(alb.title)}" referrerpolicy="no-referrer" onerror="this.src=item.fallback || \'data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 24 24\\' fill=\\'%23282828\\'><rect width=\\'24\\' height=\\'24\\' rx=\\'4\\' fill=\\'%23282828\\'/><path d=\\'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z\\' fill=\\'%231ed760\\'/></svg>\'">
         </div>
         <div class="sp-card-info">
           <div class="sp-card-title">${this.escapeHtml(alb.title)}</div>
@@ -4226,7 +4226,7 @@ class PlayifyEngine {
         </div>
       </div>
       <div class="sp-artist-pick-body" onclick="sp.playArtistPickSong()">
-        <img src="${topSong.image || avatar}" class="sp-artist-pick-cover" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300'">
+        <img src="${topSong.image || avatar}" class="sp-artist-pick-cover" onerror="this.src=item.fallback || \'data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 24 24\\' fill=\\'%23282828\\'><rect width=\\'24\\' height=\\'24\\' rx=\\'4\\' fill=\\'%23282828\\'/><path d=\\'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z\\' fill=\\'%231ed760\\'/></svg>\'">
         <div class="sp-artist-pick-info">
           <div class="sp-artist-pick-track">${this.escapeHtml(topSong.title || 'Featured Track')}</div>
           <div class="sp-artist-pick-sub">${this.escapeHtml(topSong.album || 'Single')} &bull; Recommended</div>
@@ -5158,7 +5158,7 @@ class PlayifyEngine {
             </button>
           </div>
         </div>
-        <img src="${song.image}" class="sp-billboard-art" alt="${song.title}" loading="eager" decoding="async" referrerpolicy="no-referrer" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300'">
+        <img src="${song.image}" class="sp-billboard-art" alt="${song.title}" loading="eager" decoding="async" referrerpolicy="no-referrer" onerror="this.src=item.fallback || \'data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 24 24\\' fill=\\'%23282828\\'><rect width=\\'24\\' height=\\'24\\' rx=\\'4\\' fill=\\'%23282828\\'/><path d=\\'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z\\' fill=\\'%231ed760\\'/></svg>\'">
       `;
       heroBox.onclick = () => this.togglePlay();
     }
@@ -5563,10 +5563,12 @@ class PlayifyEngine {
     }
 
     const defaultPlaylists = [
-      { id: '1', title: 'Punjabi Hot Hits 🔥', subtitle: 'Playlist • Shubh, Sidhu, Diljit', type: 'playlist', image: 'https://c.saavncdn.com/editorial/Punjabi-IndiaSuperhitsTop50_20260814050714_500x500.jpg', ts: 100 },
-      { id: '2', title: 'Moosetape Forever 🦁', subtitle: 'Album • Sidhu Moose Wala', type: 'album', image: 'https://c.saavncdn.com/202/Moosetape-Punjabi-2021-20210514211104-500x500.jpg', ts: 200 },
-      { id: '3', title: 'Karan Aujla Specials ⚡', subtitle: 'Playlist • Four You, Making Memories', type: 'playlist', image: 'https://c.saavncdn.com/978/Making-Memories-Punjabi-2023-20230818074945-500x500.jpg', ts: 300 },
-      { id: '4', title: 'Diljit Dosanjh Blast 🌟', subtitle: 'Album • Aura, Ghost, G.O.A.T.', type: 'album', image: 'https://c.saavncdn.com/748/Ghost-Punjabi-2023-20230929053531-500x500.jpg', ts: 400 }
+      { id: '1', title: 'Punjabi Hot Hits 🔥', subtitle: 'Playlist • Karan Aujla, Shubh, Sidhu', type: 'playlist', image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300', fallback: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300', ts: 100 },
+      { id: '2', title: 'Moosetape Forever 🦁', subtitle: 'Album • Sidhu Moose Wala', type: 'album', image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=300', fallback: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=300', ts: 200 },
+      { id: '3', title: 'Karan Aujla Specials ⚡', subtitle: 'Playlist • Four You, Making Memories', type: 'playlist', image: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=300', fallback: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=300', ts: 300 },
+      { id: '4', title: 'Diljit Dosanjh Blast 🌟', subtitle: 'Album • Aura, Ghost, G.O.A.T.', type: 'album', image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300', fallback: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300', ts: 400 },
+      { id: '5', title: 'Bollywood Central 🎬', subtitle: 'Playlist • Arijit Singh, Jasleen Royal', type: 'playlist', image: 'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=300', fallback: 'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=300', ts: 500 },
+      { id: '6', title: 'Today\'s Top Hits 🌍', subtitle: 'Playlist • Global Billboard Top 50', type: 'playlist', image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300', fallback: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300', ts: 600 }
     ];
 
     const customItems = this.customPlaylists.map((pl, i) => ({
@@ -5650,7 +5652,7 @@ class PlayifyEngine {
             : `sp.openAlbumPage('${this.escapeJsString(item.title)}', '${this.escapeJsString(item.subtitle)}', '${this.escapeJsString(item.image)}', '${item.id || ''}')`
       }">
         <div class="sp-card-cover-wrap" style="${item.isArtist ? 'border-radius:50%;' : ''}">
-          <img src="${item.image}" alt="${this.escapeHtml(item.title)}" referrerpolicy="no-referrer" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300'" style="${item.isArtist ? 'border-radius:50%;' : ''}">
+          <img src="${item.image}" alt="${this.escapeHtml(item.title)}" referrerpolicy="no-referrer" onerror="this.src=item.fallback || \'data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 24 24\\' fill=\\'%23282828\\'><rect width=\\'24\\' height=\\'24\\' rx=\\'4\\' fill=\\'%23282828\\'/><path d=\\'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z\\' fill=\\'%231ed760\\'/></svg>\'" style="${item.isArtist ? 'border-radius:50%;' : ''}">
           ${isPinned ? '<div class="sp-pinned-badge" title="Pinned to top" style="position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.75);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;color:var(--sp-green);font-size:10px;z-index:2;"><i class="fa-solid fa-thumbtack"></i></div>' : ''}
           <div class="sp-card-play-btn"><i class="fa-solid fa-play"></i></div>
         </div>
@@ -6127,7 +6129,7 @@ class PlayifyEngine {
               ${playlistsToShow.map(pl => `
                 <div class="sp-card" onclick="sp.openPlaylist('${this.escapeJsString(pl.title)}', '${this.escapeJsString(pl.subtitle)}', '${this.escapeJsString(pl.image)}', '${this.escapeJsString(pl.id)}')">
                   <div class="sp-card-cover-wrap">
-                    <img src="${pl.image}" alt="${this.escapeHtml(pl.title)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300'">
+                    <img src="${pl.image}" alt="${this.escapeHtml(pl.title)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.src=item.fallback || \'data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 24 24\\' fill=\\'%23282828\\'><rect width=\\'24\\' height=\\'24\\' rx=\\'4\\' fill=\\'%23282828\\'/><path d=\\'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z\\' fill=\\'%231ed760\\'/></svg>\'">
                     <div class="sp-card-play-btn" onclick="event.stopPropagation(); sp.playPlaylistById('${this.escapeJsString(pl.id)}', '${this.escapeJsString(pl.title)}')"><i class="fa-solid fa-play"></i></div>
                   </div>
                   <div class="sp-card-info">
@@ -6217,7 +6219,7 @@ class PlayifyEngine {
             <div class="sp-shelf-row">
               ${this.homeData.featured_albums.slice(0, 16).map(alb => `
                 <div class="sp-card" onclick="sp.openAlbumPage('${alb.title.replace(/'/g, "\\'")}', '${alb.subtitle.replace(/'/g, "\\'")}', '${alb.image}', '${alb.id || ''}')">
-                  <div class="sp-card-cover-wrap"><img src="${alb.image}" alt="${alb.title}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300'"></div>
+                  <div class="sp-card-cover-wrap"><img src="${alb.image}" alt="${alb.title}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.src=item.fallback || \'data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 24 24\\' fill=\\'%23282828\\'><rect width=\\'24\\' height=\\'24\\' rx=\\'4\\' fill=\\'%23282828\\'/><path d=\\'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z\\' fill=\\'%231ed760\\'/></svg>\'"></div>
                   <div class="sp-card-info">
                     <div class="sp-card-title">${alb.title}</div>
                     <div class="sp-card-desc">${alb.subtitle}</div>
@@ -6246,7 +6248,7 @@ class PlayifyEngine {
     return `
       <div class="sp-card" onclick="sp.playSongById('${s.id}')">
         <div class="sp-card-cover-wrap">
-          <img src="${s.image}" alt="${this.escapeHtml(s.title)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300'">
+          <img src="${s.image}" alt="${this.escapeHtml(s.title)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.src=item.fallback || \'data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 24 24\\' fill=\\'%23282828\\'><rect width=\\'24\\' height=\\'24\\' rx=\\'4\\' fill=\\'%23282828\\'/><path d=\\'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z\\' fill=\\'%231ed760\\'/></svg>\'">
           <div class="sp-card-play-btn"><i class="fa-solid fa-play"></i></div>
         </div>
         <div class="sp-card-info">
