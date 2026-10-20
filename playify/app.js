@@ -2842,6 +2842,7 @@ class PlayifyEngine {
   // 5. DYNAMIC AMBIENT GLOW
   // ========================================================================
   updateAmbientGlow(imgSrc) {
+    if (typeof window !== 'undefined' && window.innerWidth < 900) return; // Skip heavy canvas pixel loops on mobile
     if (!this.ambientGlowEnabled || !imgSrc) return;
 
     try {
@@ -5970,8 +5971,12 @@ class PlayifyEngine {
         shelfConfigs = shelfConfigs.filter(conf => activeKeys.includes(conf.key));
       }
 
+      const isMobileScreen = (typeof window !== 'undefined' && window.innerWidth < 900);
+      const maxPerShelf = isMobileScreen ? 14 : 35;
+
       shelfConfigs.forEach(conf => {
-        const list = sections[conf.key] || [];
+        const fullList = sections[conf.key] || [];
+        const list = isMobileScreen ? fullList.slice(0, maxPerShelf) : fullList;
         if (list.length) {
           const badgeHtml = conf.badge 
             ? `<span style="background:var(--sp-green);color:#000;font-size:10px;font-weight:800;padding:2px 8px;border-radius:12px;margin-left:10px;letter-spacing:0.5px;text-transform:uppercase;">${conf.badge}</span>` 
