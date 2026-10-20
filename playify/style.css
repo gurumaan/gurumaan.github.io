@@ -7847,3 +7847,342 @@ input:checked + .sp-slider-round:before {
     display: none !important;
   }
 }
+
+
+/* ==========================================================================
+   SPOTIFY MOBILE 1:1 REPLICA - ALL TABS, HEADERS & DRAWERS
+   ========================================================================== */
+
+/* 1. Mobile Topbar Dynamic View Management */
+@media (max-width: 900px) {
+  body[data-current-view="search"] #sp-main-topbar,
+  body[data-current-view="library"] #sp-main-topbar {
+    display: none !important;
+  }
+
+  body[data-current-view="artist"] #sp-main-topbar,
+  body[data-current-view="album"] #sp-main-topbar {
+    background: transparent !important;
+    border-bottom: none !important;
+  }
+
+  body[data-current-view="artist"] #sp-mobile-top-pills,
+  body[data-current-view="album"] #sp-mobile-top-pills {
+    display: none !important;
+  }
+
+  body[data-current-view="home"] #sp-main-topbar {
+    display: flex !important;
+  }
+}
+
+/* 2. Spotify Mobile Search Header */
+.sp-mob-search-header {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .sp-mob-search-header {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 16px 8px 16px;
+    background: #121212;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .sp-mob-search-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .sp-mob-search-title {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+  }
+
+  .sp-mob-camera-btn {
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Spotify Signature White Search Bar */
+  .sp-mob-search-bar {
+    width: 100%;
+    height: 48px;
+    background: #ffffff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 12px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    cursor: text;
+  }
+
+  .sp-mob-search-bar input {
+    flex: 1;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #121212;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+  }
+
+  .sp-mob-search-bar input::placeholder {
+    color: #535353;
+    font-weight: 500;
+  }
+
+  .sp-mob-search-clear {
+    background: none;
+    border: none;
+    color: #727272;
+    font-size: 22px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+  }
+}
+
+/* 3. Spotify Create Bottom Sheet */
+.sp-bottom-sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 200000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.sp-bottom-sheet {
+  width: 100%;
+  max-width: 500px;
+  background: #242424;
+  border-radius: 20px 20px 0 0;
+  padding: 12px 20px 36px 20px;
+  box-sizing: border-box;
+  animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sp-sheet-drag-handle {
+  width: 36px;
+  height: 4px;
+  background: #535353;
+  border-radius: 2px;
+  margin: 0 auto 16px auto;
+}
+
+.sp-sheet-header h3 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.sp-create-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sp-create-option-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.sp-create-option-item:active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.sp-create-option-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #333333;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.sp-create-option-icon.blend {
+  background: linear-gradient(135deg, #450af5, #1ed760);
+}
+
+.sp-create-option-icon.jam {
+  background: linear-gradient(135deg, #1ed760, #1db954);
+  color: #000000;
+}
+
+.sp-create-option-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.sp-create-option-desc {
+  font-size: 13px;
+  color: #a7a7a7;
+}
+
+/* 4. Spotify Profile Slide Drawer */
+.sp-profile-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 210000;
+  display: flex;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.sp-profile-drawer {
+  width: 290px;
+  max-width: 82vw;
+  height: 100%;
+  background: #121212;
+  border-right: 1px solid #282828;
+  display: flex;
+  flex-direction: column;
+  padding: 36px 20px 24px 20px;
+  box-sizing: border-box;
+  animation: slideInLeft 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+}
+
+.sp-drawer-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.sp-drawer-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #ff94b8;
+  color: #000000;
+  font-size: 24px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sp-drawer-name {
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+}
+
+.sp-drawer-sub {
+  font-size: 13px;
+  color: #a7a7a7;
+  cursor: pointer;
+  margin-top: 2px;
+}
+
+.sp-drawer-divider {
+  height: 1px;
+  background: #282828;
+  margin: 12px 0 16px 0;
+}
+
+.sp-drawer-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.sp-drawer-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+
+.sp-drawer-item:active {
+  background: #242424;
+}
+
+.sp-drawer-item i,
+.sp-drawer-item svg {
+  width: 20px;
+  font-size: 18px;
+  color: #b3b3b3;
+  text-align: center;
+}
+
+.sp-drawer-badge {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 800;
+  background: #1ed760;
+  color: #000000;
+  padding: 2px 7px;
+  border-radius: 10px;
+}
+
+.sp-drawer-footer {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid #282828;
+}
+
+.sp-drawer-tagline {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.sp-drawer-version {
+  font-size: 11px;
+  color: #727272;
+  margin-top: 2px;
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}

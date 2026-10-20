@@ -165,7 +165,7 @@
 
                 <div class="sp-topbar-left">
           <!-- Official Spotify Mobile User Avatar -->
-          <div class="sp-mobile-user-avatar" id="sp-mobile-avatar" onclick="sp.toggleUserMenu(event)" title="Account">G</div>
+          <div class="sp-mobile-user-avatar" id="sp-mobile-avatar" onclick="sp.openProfileDrawer()" title="Account">G</div>
           <div class="sp-mobile-top-back hidden" id="sp-mobile-top-back" onclick="sp.historyBack()">
             <i class="fa-solid fa-arrow-left"></i>
           </div>
@@ -322,6 +322,26 @@
              2. SEARCH VIEW (2-COLUMN GRID WITH TILTED ART)
              ================================================================ -->
         <section class="sp-view-section" id="view-search" style="display:none;">
+          <!-- Official Spotify Mobile Search Header -->
+          <div class="sp-mob-search-header">
+            <div class="sp-mob-search-top-row">
+              <div class="sp-mobile-user-avatar" onclick="sp.openProfileDrawer()" title="Profile">G</div>
+              <h1 class="sp-mob-search-title">Search</h1>
+              <button class="sp-mob-camera-btn" onclick="sp.openCodeScannerModal()" title="Scan Spotify Code" aria-label="Scan Spotify Code">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                  <path d="M15.5 4l-1.08-1.74A2 2 0 0 0 12.72 1h-1.44a2 2 0 0 0-1.7 1.26L8.5 4H5a3 3 0 0 0-3 3v11a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3h-3.5zM12 18a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                </svg>
+              </button>
+            </div>
+            <!-- Spotify White Pill Search Input -->
+            <div class="sp-mob-search-bar" onclick="document.getElementById('sp-mob-search-input').focus()">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#121212">
+                <path d="M10.533 1.27893C5.42321 1.27893 1.27893 5.42321 1.27893 10.533C1.27893 15.6428 5.42321 19.7871 10.533 19.7871C12.8198 19.7871 14.9126 18.9587 16.5369 17.5752L21.4808 22.5192C21.7672 22.8055 22.2315 22.8055 22.5178 22.5192C22.8042 22.2328 22.8042 21.7685 22.5178 21.4822L17.5739 16.5382C18.9574 14.9139 19.7871 12.8211 19.7871 10.533C19.7871 5.42321 15.6428 1.27893 10.533 1.27893ZM2.74559 10.533C2.74559 6.23214 6.23214 2.74559 10.533 2.74559C14.8339 2.74559 18.3204 6.23214 18.3204 10.533C18.3204 14.8339 14.8339 18.3204 10.533 18.3204C6.23214 18.3204 2.74559 14.8339 2.74559 10.533Z"/>
+              </svg>
+              <input type="text" id="sp-mob-search-input" placeholder="What do you want to listen to?" autocomplete="off" oninput="sp.handleMobSearchInput(this.value)">
+              <button class="sp-mob-search-clear" id="sp-mob-search-clear" onclick="event.stopPropagation(); sp.clearMobSearch()" style="display:none;">&times;</button>
+            </div>
+          </div>
           <div class="sp-search-results-wrapper" id="sp-search-results-area" style="display:none;">
             <!-- Search Entity Filter Pills -->
             <div class="sp-category-pills sp-search-filter-pills" id="sp-search-filter-pills" style="margin-bottom:18px;">
@@ -381,17 +401,17 @@
              ================================================================ -->
         <section class="sp-view-section" id="view-library" style="display:none;">
           
-          <div class="sp-library-page-header">
+          <div class="sp-library-page-header sp-mob-lib-header">
             <div class="sp-lib-title-row">
               <div style="display:flex;align-items:center;gap:12px;">
-                <div class="sp-user-avatar-mini" onclick="sp.openUserProfile()" title="Your Profile" style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#5038a0,#1ed760);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#fff;cursor:pointer;">P</div>
-                <h1 class="sp-greeting-title" style="margin:0;">Your Library</h1>
+                <div class="sp-mobile-user-avatar" onclick="sp.openProfileDrawer()" title="Profile">G</div>
+                <h1 class="sp-greeting-title" style="margin:0;font-size:24px;font-weight:800;">Your Library</h1>
               </div>
-              <div style="display:flex;align-items:center;gap:10px;">
+              <div style="display:flex;align-items:center;gap:14px;">
                 <button class="sp-icon-btn" onclick="sp.toggleLibrarySearch()" title="Search in Your Library"><i class="fa-solid fa-magnifying-glass"></i></button>
-                <button class="sp-icon-btn" onclick="sp.openLibraryCreateMenu()" title="Create playlist or blend"><i class="fa-solid fa-plus"></i></button>
-                <button class="sp-icon-btn" onclick="sp.openLikedSongs()" title="Liked Songs"><i class="fa-solid fa-heart" style="color:var(--sp-green)"></i></button>
+                <button class="sp-icon-btn" onclick="sp.openSpotifyCreateSheet()" title="Create playlist, blend or jam"><i class="fa-solid fa-plus"></i></button>
               </div>
+            </div>
             </div>
 
             <!-- Library Expandable Search Input -->
@@ -992,7 +1012,7 @@
       </svg>
       <span>Your Library</span>
     </button>
-    <button class="sp-mob-item" id="mob-nav-create" onclick="sp.openCreatePlaylistModal()">
+    <button class="sp-mob-item" id="mob-nav-create" onclick="sp.openSpotifyCreateSheet()">
       <svg class="sp-nav-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
         <path d="M12 1a1 1 0 0 1 1 1v9h9a1 1 0 1 1 0 2h-9v9a1 1 0 1 1-2 0v-9H2a1 1 0 1 1 0-2h9V2a1 1 0 0 1 1-1z"/>
       </svg>
@@ -2126,6 +2146,92 @@
       });
     }
   </script>
+
+
+    <!-- SPOTIFY CREATE BOTTOM SHEET -->
+    <div class="sp-bottom-sheet-backdrop" id="sp-create-sheet" style="display:none;" onclick="sp.closeSpotifyCreateSheet()">
+      <div class="sp-bottom-sheet" onclick="event.stopPropagation()">
+        <div class="sp-sheet-drag-handle"></div>
+        <div class="sp-sheet-header">
+          <h3>Create</h3>
+        </div>
+        <div class="sp-create-options-list">
+          <div class="sp-create-option-item" onclick="sp.handleCreatePlaylistChoice()">
+            <div class="sp-create-option-icon">
+              <i class="fa-solid fa-music"></i>
+            </div>
+            <div class="sp-create-option-text">
+              <div class="sp-create-option-title">Playlist</div>
+              <div class="sp-create-option-desc">Build a playlist with songs or episodes</div>
+            </div>
+          </div>
+          <div class="sp-create-option-item" onclick="sp.handleCreateBlendChoice()">
+            <div class="sp-create-option-icon blend">
+              <i class="fa-solid fa-user-group"></i>
+            </div>
+            <div class="sp-create-option-text">
+              <div class="sp-create-option-title">Blend</div>
+              <div class="sp-create-option-desc">Combine tastes in a shared playlist made for 2</div>
+            </div>
+          </div>
+          <div class="sp-create-option-item" onclick="sp.handleCreateJamChoice()">
+            <div class="sp-create-option-icon jam">
+              <i class="fa-solid fa-users-rays"></i>
+            </div>
+            <div class="sp-create-option-text">
+              <div class="sp-create-option-title">Jam</div>
+              <div class="sp-create-option-desc">Listen together with friends in real-time</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- SPOTIFY PROFILE & SETTINGS SLIDE DRAWER -->
+    <div class="sp-profile-drawer-backdrop" id="sp-profile-drawer-backdrop" style="display:none;" onclick="sp.closeProfileDrawer()">
+      <div class="sp-profile-drawer" id="sp-profile-drawer" onclick="event.stopPropagation()">
+        <div class="sp-drawer-header">
+          <div class="sp-drawer-avatar">G</div>
+          <div class="sp-drawer-user-info">
+            <div class="sp-drawer-name">GURUMAAN</div>
+            <div class="sp-drawer-sub" onclick="sp.openUserProfile()">View profile</div>
+          </div>
+        </div>
+        <div class="sp-drawer-divider"></div>
+        <div class="sp-drawer-menu">
+          <div class="sp-drawer-item" onclick="sp.openWhatsNew()">
+            <i class="fa-solid fa-bolt"></i>
+            <span>What's new</span>
+            <span class="sp-drawer-badge">v200.1</span>
+          </div>
+          <div class="sp-drawer-item" onclick="sp.openRecentlyPlayed()">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Listening history</span>
+          </div>
+          <div class="sp-drawer-item" onclick="sp.openSettingsModal()">
+            <i class="fa-solid fa-gear"></i>
+            <span>Settings and privacy</span>
+          </div>
+          <div class="sp-drawer-item" onclick="sp.openEqualizerModal()">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Equalizer &amp; Bass Boost</span>
+          </div>
+          <div class="sp-drawer-item" onclick="sp.openSleepTimerModal()">
+            <i class="fa-solid fa-moon"></i>
+            <span>Sleep timer</span>
+          </div>
+          <div class="sp-drawer-item" onclick="sp.openDownloadedSongsView()">
+            <i class="fa-solid fa-circle-down"></i>
+            <span>Downloaded music (Offline)</span>
+          </div>
+        </div>
+        <div class="sp-drawer-footer">
+          <div class="sp-drawer-tagline">Playify 200.1 &bull; Spotify Edition</div>
+          <div class="sp-drawer-version">80M+ Lossless Audio &bull; 100% Free VIP</div>
+        </div>
+      </div>
+    </div>
 
 </body>
 </html>

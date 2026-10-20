@@ -1143,6 +1143,82 @@ class PlayifyEngine {
     }
   }
 
+  
+  // Official Spotify Create Bottom Sheet Methods
+  openSpotifyCreateSheet() {
+    const sheet = document.getElementById('sp-create-sheet');
+    if (sheet) sheet.style.display = 'flex';
+  }
+
+  closeSpotifyCreateSheet() {
+    const sheet = document.getElementById('sp-create-sheet');
+    if (sheet) sheet.style.display = 'none';
+  }
+
+  handleCreatePlaylistChoice() {
+    this.closeSpotifyCreateSheet();
+    this.openCreatePlaylistModal();
+  }
+
+  handleCreateBlendChoice() {
+    this.closeSpotifyCreateSheet();
+    this.openBlendModal();
+  }
+
+  handleCreateJamChoice() {
+    this.closeSpotifyCreateSheet();
+    this.openJamModal();
+  }
+
+  // Official Spotify Profile Drawer Methods
+  openProfileDrawer() {
+    const drawer = document.getElementById('sp-profile-drawer-backdrop');
+    if (drawer) drawer.style.display = 'flex';
+  }
+
+  closeProfileDrawer() {
+    const drawer = document.getElementById('sp-profile-drawer-backdrop');
+    if (drawer) drawer.style.display = 'none';
+  }
+
+  openWhatsNew() {
+    this.closeProfileDrawer();
+    this.showToast('🚀 Playify v200.1: 1:1 Spotify Mobile Edition Active!');
+  }
+
+  // Mobile Search Handling
+  handleMobSearchInput(q) {
+    const clearBtn = document.getElementById('sp-mob-search-clear');
+    if (clearBtn) clearBtn.style.display = q ? 'block' : 'none';
+    
+    // Sync with global desktop search input if needed
+    const globalInput = document.getElementById('sp-global-search-input');
+    if (globalInput) globalInput.value = q;
+
+    if (!q || !q.trim()) {
+      this.showBrowseAllCategories();
+      return;
+    }
+
+    const local = this.searchLocalDb(q);
+    if (local && (local.songs.length || local.artists.length)) {
+      this.renderSearchResults(local, q);
+    }
+    clearTimeout(this.mobSearchTimer);
+    this.mobSearchTimer = setTimeout(() => this.performSearch(q), 250);
+  }
+
+  clearMobSearch() {
+    const mobInput = document.getElementById('sp-mob-search-input');
+    if (mobInput) {
+      mobInput.value = '';
+      mobInput.focus();
+    }
+    const clearBtn = document.getElementById('sp-mob-search-clear');
+    if (clearBtn) clearBtn.style.display = 'none';
+    this.showBrowseAllCategories();
+  }
+
   async init() {
     try {
       this.dismissSplashScreen();
@@ -5255,10 +5331,13 @@ class PlayifyEngine {
 
     document.body.setAttribute('data-current-view', viewId);
     const backBtn = document.getElementById('sp-mobile-back-btn');
-    const mobAvatar = document.getElementById('sp-mobile-user-avatar');
+    const mobAvatar = document.getElementById('sp-mobile-avatar') || document.getElementById('sp-mobile-user-avatar');
+    const mobPills = document.getElementById('sp-mobile-top-pills');
     const isSubView = (viewId === 'album' || viewId === 'artist' || viewId === 'lyrics');
+    
     if (backBtn) backBtn.classList.toggle('visible', isSubView);
     if (mobAvatar) mobAvatar.classList.toggle('hidden', isSubView);
+    if (mobPills) mobPills.style.display = (viewId === 'home') ? 'flex' : 'none';
 
     const target = document.getElementById(`view-${viewId}`);
     if (target) {
@@ -5855,6 +5934,19 @@ class PlayifyEngine {
   }
 
   filterCategory(cat, btnEl) {
+    document.querySelectorAll('.sp-cat-pill, .sp-mob-pill').forEach(b => b.classList.remove('active'));
+    if (btnEl) btnEl.classList.add('active');
+
+    if (cat === 'all') {
+      this.renderHomeViews('all');
+      this.showToast('All Music & Podcasts');
+    } else if (cat === 'music') {
+      this.renderHomeViews('all');
+      this.showToast('Music & Top Mixes');
+    } else if (cat === 'podcasts') {
+      this.renderPodcastsHub();
+      this.showToast('Podcasts & Shows');
+    }
     document.querySelectorAll('.sp-cat-pill').forEach(b => b.classList.remove('active'));
     if (btnEl) btnEl.classList.add('active');
     
@@ -5893,8 +5985,12 @@ class PlayifyEngine {
 
     if (billboard.length) this.adaptHomeAndQueueToVibe(billboard[0]);
 
+    const greeting = document.getElementById('sp-greeting-text');
+    if (greeting) greeting.style.display = 'block';
+
     const quickGrid = document.getElementById('sp-quick-grid');
     if (quickGrid) {
+      quickGrid.style.display = 'grid';
       const default8 = [
         { id: 'aujla_szn', title: 'AUJLA SZN 1', image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=200', type: 'album' },
         { id: 'bandook_2', title: 'Bandook 2', image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=200', type: 'track' },
