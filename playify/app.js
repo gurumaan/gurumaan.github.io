@@ -4630,6 +4630,14 @@ class PlayifyEngine {
       playing = Boolean(this.isPlaying || (this.audio && !this.audio.paused && !this.audio.ended && this.audio.currentTime > 0));
     }
     const icon = playing ? '<i class="fa-solid fa-pause"></i>' : '<i class="fa-solid fa-play"></i>';
+    const mobPlay = document.getElementById('mob-play-svg');
+    if (mobPlay) {
+      if (playing) {
+        mobPlay.innerHTML = '<path d="M5.7 3a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7H5.7zm9 0a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7h-2.6z"/>';
+      } else {
+        mobPlay.innerHTML = '<path d="M7.05 3.606l13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"/>';
+      }
+    }
     const mainBtn = document.getElementById('btn-play-pause');
     if (mainBtn) {
       mainBtn.innerHTML = icon;
@@ -4709,6 +4717,12 @@ class PlayifyEngine {
     const artistLinksHtml = artistParts.map(a => 
       `<span class="sp-artist-link" onclick="event.stopPropagation(); sp.openArtistFromPlayer('${this.escapeJsString(a)}')" title="View ${this.escapeHtml(a)} profile">${this.escapeHtml(a)}</span>`
     ).join(', ');
+
+    // Dynamic Spotify Mini Player Tint
+    const tints = ['#3d1a10', '#1c3127', '#251a3a', '#342617', '#1b2a38', '#2e2528'];
+    const tintColor = tints[Math.abs((song.title || '').length) % tints.length];
+    document.documentElement.style.setProperty('--sp-mini-tint', tintColor);
+    if (this.isSongLiked) this.updateLikeButtonUI(this.isSongLiked(song.id));
 
     const pArtist = document.getElementById('player-artist-name');
     if (pArtist) {
@@ -5880,22 +5894,102 @@ class PlayifyEngine {
     if (billboard.length) this.adaptHomeAndQueueToVibe(billboard[0]);
 
     const quickGrid = document.getElementById('sp-quick-grid');
-    if (quickGrid && billboard.length) {
-      quickGrid.innerHTML = billboard.slice(0, 6).map((s, idx) => {
-        this.registerSong(s);
-        return `
-        <div class="sp-quick-card" onclick="sp.playTopHitsTrack('${this.escapeJsString(s.id)}')">
-          <img src="${s.image}" alt="${this.escapeHtml(s.title)}" loading="eager" decoding="async" referrerpolicy="no-referrer" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300'">
-          <span class="sp-quick-title">${this.escapeHtml(s.title)}</span>
-          <div class="sp-quick-play-btn"><i class="fa-solid fa-play"></i></div>
+    if (quickGrid) {
+      const default8 = [
+        { id: 'aujla_szn', title: 'AUJLA SZN 1', image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=200', type: 'album' },
+        { id: 'bandook_2', title: 'Bandook 2', image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=200', type: 'track' },
+        { id: 'liked_songs', title: 'Liked Songs', image: 'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=200', type: 'playlist' },
+        { id: 'persona', title: 'PERSONA', image: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=200', type: 'album' },
+        { id: 'four_me', title: 'Four Me', image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=200', type: 'album' },
+        { id: 'gym_workout', title: 'Punjabi Gym 🏋️ Workout Songs', image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=200', type: 'playlist' },
+        { id: 'making_memories', title: 'Inferno', image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=200', type: 'album' },
+        { id: 'cheema_mix', title: 'Cheema Y Mix', image: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=200', type: 'playlist' }
+      ];
+
+      // Blend with billboard if available
+      const items8 = [...default8];
+      if (billboard && billboard.length >= 8) {
+        for (let i = 0; i < 4; i++) {
+          if (billboard[i]) {
+            items8[i] = { id: billboard[i].id, title: billboard[i].title, image: billboard[i].image, type: 'track' };
+          }
+        }
+      }
+
+      quickGrid.innerHTML = items8.map(item => `
+        <div class="sp-quick-card" onclick="sp.handleQuickTileClick('${this.escapeJsString(item.id)}', '${item.type}')">
+          <img src="${item.image}" alt="${this.escapeHtml(item.title)}" loading="eager" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=200'">
+          <span class="sp-quick-title">${this.escapeHtml(item.title)}</span>
         </div>
-      `;
-      }).join('');
+      `).join('');
     }
 
     const shelvesContainer = document.getElementById('sp-shelves-container');
     if (shelvesContainer) {
       let html = '';
+
+      // 1. YOUR TOP MIXES (Exact Spotify Mobile Feature from Screenshot 1)
+      const topMixes = [
+        { title: 'Hip Hop Mix', tag: 'Hip Hop Mix', barColor: '#b388ff', desc: 'Wicked Sunny, Shubh, Cheema Y, Karan Aujla and more', image: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=300', genre: 'hiphop' },
+        { title: 'Pop Mix', tag: 'Pop Mix', barColor: '#d7ccc8', desc: 'Cheema Y, K\'NAAN, Karan Aujla, Diljit Dosanjh and more', image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300', genre: 'pop' },
+        { title: 'Punjabi Mix', tag: 'Punjabi Mix', barColor: '#80deea', desc: 'Sidhu Moose Wala, Karan Aujla, Diljit Dosanjh, AP Dhillon', image: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=300', genre: 'punjabi' },
+        { title: 'Romantic Mix', tag: 'Romantic Mix', barColor: '#f48fb1', desc: 'Arijit Singh, Jasleen Royal, B Praak, Shreya Ghoshal', image: 'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=300', genre: 'chill' },
+        { title: 'Gym Workout Mix', tag: 'Workout Mix', barColor: '#ffab91', desc: 'High-energy workout motivation, Sidhu & Aujla bangers', image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=300', genre: 'punjabi' }
+      ];
+
+      html += `
+        <div class="sp-shelf-section">
+          <div class="sp-shelf-header">
+            <h2 class="sp-shelf-title">Your top mixes</h2>
+          </div>
+          <div class="sp-shelf-row">
+            ${topMixes.map(mix => `
+              <div class="sp-card sp-mix-card" onclick="sp.playTopMix('${mix.genre}', '${this.escapeJsString(mix.title)}')">
+                <div class="sp-card-cover-wrap sp-mix-cover-wrap">
+                  <img src="${mix.image}" alt="${this.escapeHtml(mix.title)}" loading="lazy" decoding="async">
+                  <div class="sp-mix-badge-strip" style="background:${mix.barColor};position:absolute;bottom:0;left:0;right:0;height:26px;display:flex;align-items:center;padding:0 8px;font-weight:900;font-size:12px;color:#000;">
+                    ${mix.tag}
+                  </div>
+                </div>
+                <div class="sp-card-info">
+                  <div class="sp-card-desc">${mix.desc}</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
+      // 2. RECOMMENDED STATIONS (Exact Spotify Mobile Feature from Screenshot 1)
+      const stations = [
+        { title: 'Bloom', desc: 'Bloom Radio &bull; Chilled Acoustic & Indie Melodies', bg: '#f8bbd0', color: '#880e4f', img: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=160' },
+        { title: 'IYKYK', desc: 'IYKYK Radio &bull; Underground Punjabi & Trap', bg: '#ffcdd2', color: '#b71c1c', img: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=160' },
+        { title: 'Arjan Dhillon', desc: 'Arjan Dhillon Radio &bull; Pure Folk & Beats', bg: '#ffe082', color: '#e65100', img: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=160' },
+        { title: 'Sidhu Moose Wala', desc: 'Sidhu Moose Wala Radio &bull; Legend Forever', bg: '#c8e6c9', color: '#1b5e20', img: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=160' }
+      ];
+
+      html += `
+        <div class="sp-shelf-section">
+          <div class="sp-shelf-header">
+            <h2 class="sp-shelf-title">Recommended Stations</h2>
+          </div>
+          <div class="sp-shelf-row">
+            ${stations.map(st => `
+              <div class="sp-card sp-station-card" style="background:${st.bg};color:${st.color};border-radius:6px;padding:12px;cursor:pointer;flex:0 0 152px;width:152px;" onclick="sp.startArtistRadio('${this.escapeJsString(st.title)}')">
+                <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:900;letter-spacing:1px;margin-bottom:8px;color:${st.color};">
+                  <span>SPOTIFY</span>
+                  <span>RADIO</span>
+                </div>
+                <div style="width:100%;height:96px;border-radius:4px;overflow:hidden;margin-bottom:8px;">
+                  <img src="${st.img}" alt="${st.title}" style="width:100%;height:100%;object-fit:cover;">
+                </div>
+                <div style="font-size:16px;font-weight:900;color:${st.color};">${st.title}</div>
+                <div style="font-size:11px;color:${st.color};opacity:0.8;margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${st.desc}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
 
       // Genre-based shelf filtering
       const genreShelfMap = {

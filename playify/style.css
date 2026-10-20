@@ -7481,3 +7481,369 @@ input:checked + .sp-slider-round:before {
   height: 60px;
 }
 
+
+
+/* ==========================================================================
+   1:1 SPOTIFY MOBILE PIXEL-PERFECT REPLICA OVERRIDES
+   ========================================================================== */
+@media (max-width: 900px) {
+  /* Spotify pure dark background */
+  html, body, .sp-app-layout, .sp-viewport, #view-home {
+    background: #121212 !important;
+  }
+
+  /* Topbar with Avatar + All | Music | Podcasts */
+  .sp-top-bar {
+    padding: calc(env(safe-area-inset-top, 0px) + 8px) 16px 8px 16px !important;
+    background: #121212 !important;
+    border-bottom: none !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    min-height: 52px !important;
+  }
+
+  .sp-topbar-left {
+    flex: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    min-width: 0 !important;
+  }
+
+  .sp-mobile-user-avatar {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 50% !important;
+    background: #f06292 !important;
+    color: #ffffff !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    cursor: pointer !important;
+  }
+
+  .sp-mobile-top-pills {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+  }
+  .sp-mobile-top-pills::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .sp-mob-pill {
+    border: none !important;
+    border-radius: 20px !important;
+    padding: 7px 16px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+    background: #2a2a2a !important;
+    color: #ffffff !important;
+    transition: background 0.15s ease !important;
+  }
+
+  .sp-mob-pill.active {
+    background: #1ed760 !important;
+    color: #000000 !important;
+    font-weight: 700 !important;
+  }
+
+  /* Hide Desktop Search Bar & Desktop Header Controls on Mobile Home */
+  .sp-top-bar .sp-search-bar,
+  .sp-topbar-right,
+  .sp-category-pills,
+  .sp-greeting-title,
+  #sp-dj-hero-card,
+  #sp-daylist-card,
+  .sp-hero-billboard {
+    display: none !important;
+  }
+
+  /* Show search bar only when in search view */
+  #view-search.active ~ .sp-top-bar .sp-search-bar,
+  body.view-search-active .sp-top-bar .sp-search-bar {
+    display: flex !important;
+  }
+
+  /* 2x4 Quick Grid (Recent 8 tiles) */
+  .sp-quick-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    margin: 8px 0 20px 0 !important;
+    padding: 0 4px !important;
+  }
+
+  .sp-quick-card {
+    height: 56px !important;
+    display: flex !important;
+    align-items: center !important;
+    background: #282828 !important;
+    border-radius: 4px !important;
+    overflow: hidden !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    border: none !important;
+    transition: background 0.12s ease !important;
+  }
+
+  .sp-quick-card:active {
+    background: #383838 !important;
+  }
+
+  .sp-quick-card img {
+    width: 56px !important;
+    height: 56px !important;
+    object-fit: cover !important;
+    border-radius: 4px 0 0 4px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .sp-quick-title {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    padding: 0 10px !important;
+    line-height: 1.25 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .sp-quick-play-btn {
+    display: none !important;
+  }
+
+  /* Section Titles */
+  .sp-shelf-header h2, .sp-shelf-title {
+    font-size: 22px !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    letter-spacing: -0.4px !important;
+    margin: 18px 0 12px 0 !important;
+  }
+
+  /* Music Cards in Shelves */
+  .sp-shelf-row {
+    gap: 14px !important;
+    padding: 0 4px 10px 4px !important;
+  }
+
+  .sp-card {
+    flex: 0 0 148px !important;
+    width: 148px !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 4px !important;
+    padding: 0 !important;
+  }
+
+  .sp-card-cover-wrap {
+    width: 148px !important;
+    height: 148px !important;
+    border-radius: 4px !important;
+    overflow: hidden !important;
+    background: #242424 !important;
+  }
+
+  .sp-card-cover-wrap img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .sp-card-info {
+    padding: 8px 0 0 0 !important;
+  }
+
+  .sp-card-title {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .sp-card-desc {
+    font-size: 12px !important;
+    color: #a7a7a7 !important;
+    margin-top: 2px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    line-height: 1.35 !important;
+  }
+
+  .sp-card-play-btn {
+    display: none !important;
+  }
+
+  /* Floating Spotify Mini Player */
+  .sp-player-bar {
+    display: flex !important;
+    align-items: center !important;
+    position: fixed !important;
+    bottom: calc(58px + env(safe-area-inset-bottom, 0px) + 8px) !important;
+    left: 8px !important;
+    right: 8px !important;
+    width: calc(100% - 16px) !important;
+    height: 56px !important;
+    background: var(--sp-mini-tint, #282828) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 0 12px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.75) !important;
+    z-index: 9999 !important;
+    overflow: hidden !important;
+  }
+
+  .sp-player-left {
+    display: flex !important;
+    align-items: center !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+  }
+
+  #player-thumb {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 4px !important;
+    object-fit: cover !important;
+    margin-right: 10px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .sp-player-track-meta {
+    flex: 1 !important;
+    min-width: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+
+  #player-song-title {
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  #player-artist-name {
+    font-size: 12px !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    margin-top: 1px !important;
+  }
+
+  .sp-desktop-only {
+    display: none !important;
+  }
+
+  .sp-mobile-player-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+    margin-left: auto !important;
+    flex-shrink: 0 !important;
+  }
+
+  .sp-mob-act-btn {
+    background: none !important;
+    border: none !important;
+    color: #ffffff !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .sp-mob-play-btn svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  .sp-player-mini-progress {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 8px !important;
+    right: 8px !important;
+    height: 2px !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 1px !important;
+    overflow: hidden !important;
+  }
+
+  .sp-player-mini-fill {
+    height: 100% !important;
+    background: #ffffff !important;
+    border-radius: 1px !important;
+    width: 0% !important;
+  }
+
+  /* 4-Tab Spotify Mobile Bottom Nav */
+  .sp-mobile-nav {
+    display: flex !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: calc(58px + env(safe-area-inset-bottom, 0px)) !important;
+    padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+    background: #000000 !important;
+    border: none !important;
+    align-items: center !important;
+    justify-content: space-around !important;
+    z-index: 10000 !important;
+  }
+
+  .sp-mob-item {
+    flex: 1 !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    background: none !important;
+    border: none !important;
+    color: #a7a7a7 !important;
+    font-size: 10.5px !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+  }
+
+  .sp-mob-item.active {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+  }
+
+  .sp-mob-item .sp-icon-active {
+    display: none !important;
+  }
+
+  .sp-mob-item.active .sp-icon-active {
+    display: block !important;
+  }
+
+  .sp-mob-item.active .sp-icon-inactive {
+    display: none !important;
+  }
+}
